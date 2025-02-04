@@ -132,6 +132,11 @@ body {
     color: var(--mirage);
     font-weight: 700;
     text-transform: uppercase;
+    transition: 150ms ease-out;
+}
+
+.new-game-screen-new-game-buttons__button:hover {
+    border-bottom: 12px solid var(--saffron);
 }
 
 .new-game-screen-new-game-buttons__button--secondary {
@@ -139,7 +144,9 @@ body {
     border-bottom-color: var(--turquoise);
 }
 
-
+.new-game-screen-new-game-buttons__button--secondary:hover {
+    border-bottom-color: var(--turquoise);
+}
 
 .game-screen {
     width: 90%;
