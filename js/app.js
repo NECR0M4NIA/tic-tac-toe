@@ -75,11 +75,11 @@ function checkWin(board) {
 
 
 
-$newGameScreenPickPlayerIcons.forEach(function($newGameScreenPickPlayerIcon) {
-    $newGameScreenPickPlayerIcon.addEventListener("click", function() {   
-    for (let i = 0; i < $newGameScreenPickPlayerIcons.length; i++) {
-        $newGameScreenPickPlayerIcons[i].classList.remove("new-game-screen-pick-player-icon--selected")
-    }
+$newGameScreenPickPlayerIcons.forEach(function ($newGameScreenPickPlayerIcon) {
+    $newGameScreenPickPlayerIcon.addEventListener("click", function () {
+        for (let i = 0; i < $newGameScreenPickPlayerIcons.length; i++) {
+            $newGameScreenPickPlayerIcons[i].classList.remove("new-game-screen-pick-player-icon--selected")
+        }
 
         $newGameScreenPickPlayerIcon.classList.add("new-game-screen-pick-player-icon--selected")
         currentPlayer = $newGameScreenPickPlayerIcon.getAttribute("data-player")
@@ -88,25 +88,37 @@ $newGameScreenPickPlayerIcons.forEach(function($newGameScreenPickPlayerIcon) {
     })
 })
 
-$newGameScreenNewGameCpuPlayer.addEventListener("click", function() {
+$newGameScreenNewGameCpuPlayer.addEventListener("click", function () {
     $newGameScreen.classList.add("hidden")
     $gameScreen.classList.remove("hidden")
 })
 
-$gameScreenGridCells.forEach(function($gameScreenGridCell) {
+$gameScreenGridCells.forEach(function ($gameScreenGridCell) {
     $gameScreenGridCell.innerHTML = ""
 })
 
-$gameScreenGridCells.forEach(function($gameScreenGridCell) {
-    $gameScreenGridCell.addEventListener("click", function() {
+$gameScreenGridCells.forEach(function ($gameScreenGridCell) {
+    $gameScreenGridCell.addEventListener("click", function () {
+
+        const dataX = $gameScreenGridCell.getAttribute("data-x")
+        const dataY = $gameScreenGridCell.getAttribute("data-y")
+
+        gameBoard[dataY][dataX] = currentPlayer
+
+        console.log(gameBoard)
+
         if ($gameScreenGridCell.hasChildNodes() === false) {
-            if (currentPlayer === "x") {
+            if (currentPlayer === "o") {
                 $gameScreenGridCell.innerHTML = crossIcon
-                currentPlayer = "o"
+                currentPlayer = "x"
             } else {
                 $gameScreenGridCell.innerHTML = ovalIcon
-                currentPlayer = "x"
+                currentPlayer = "o"
             }
+        }
+
+        if (checkWin(gameBoard)) {
+            alert("Le joueur " + currentPlayer + " a gagné !")
         }
     })
 })
