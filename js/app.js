@@ -86,7 +86,3 @@ $gameScreenGridCells.forEach(function($gameScreenGridCell) {
         }
     })
 })
-
-if ($gameScreenGridCells == winCombinations) {
-    console.log("You win !")
-}
