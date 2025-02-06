@@ -6,15 +6,10 @@ const $gameScreenGridCells = document.querySelectorAll(".game-screen-grid__cell"
 
 
 let currentPlayer = "o"
-let winCombinations = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [1, 4, 7],
-    [2, 5, 8],
-    [3, 6, 9],
-    [1, 5, 9],
-    [3, 5, 7]
+let gameBoard = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
 ]
 
 const crossIcon = `<svg
@@ -50,6 +45,36 @@ const ovalIcon = `<svg
 `
 
 
+function checkWin(board) {
+    // Vérifier les lignes
+    for (let i = 0; i < 3; i++) {
+        if (board[i][0] !== "" && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+            return true;
+        }
+    }
+
+    // Vérifier les colonnes
+    for (let i = 0; i < 3; i++) {
+        if (board[0][i] !== "" && board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
+            return true;
+        }
+    }
+
+    // Vérifier la diagonale principale
+    if (board[0][0] !== "" && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+        return true;
+    }
+
+    // Vérifier la diagonale secondaire
+    if (board[0][2] !== "" && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+        return true;
+    }
+
+    return false;
+}
+
+
+
 $newGameScreenPickPlayerIcons.forEach(function($newGameScreenPickPlayerIcon) {
     $newGameScreenPickPlayerIcon.addEventListener("click", function() {   
     for (let i = 0; i < $newGameScreenPickPlayerIcons.length; i++) {
@@ -71,7 +96,6 @@ $newGameScreenNewGameCpuPlayer.addEventListener("click", function() {
 $gameScreenGridCells.forEach(function($gameScreenGridCell) {
     $gameScreenGridCell.innerHTML = ""
 })
-
 
 $gameScreenGridCells.forEach(function($gameScreenGridCell) {
     $gameScreenGridCell.addEventListener("click", function() {
